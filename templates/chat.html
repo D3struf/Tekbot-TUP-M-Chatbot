@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TekBot</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}"/>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='../static/TEKBOT (5).png')}}">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="chatContainer" class="container-fluid h-100" style="display:none;">
+        <div class="row justify-content-center h-100">        
+            <div class="col-md-8 col-xl-6 chat">
+                <div class="card">
+                    <div class="card-header msg_head">
+                        <div class="d-flex bd-highlight">
+                            <div class="img_cont">
+                                <img src="{{ url_for('static', filename='../static/Untitled design (3).png') }}" class="rounded-circle user_img">
+                                <span class="online_icon"></span>
+                            </div>
+                            <div class="user_info">
+                                <span>TekBot</span>
+                                <p>Ask me anything!</p>
+                            </div>
+                            <button class="close-chat">&times;</button>
+                        </div>
+                    </div>
+                    <div id="messageFormeight" class="card-body msg_card_body">
+                        
+                        
+                    </div>
+                    <div class="logo">
+                        <img class="ibon" src="{{ url_for('static', filename='../static/TEKBOT (1).png') }}"/>
+                        <h5 id="h5">How can i help you?</h5>
+                    </div>
+                    <div class="prompt">
+                        <button class="btn1" style="height:50px;width:300px;" onclick="setTextareaText('What facilities college provide?')">What facilities college provide?</button>
+                        <button class="btn1" style="height:50px;width:300px;" onclick="setTextareaText('Undergraduate enrollment procedure')" style="float: right">Undergraduate enrollment procedure</button>
+                        <button class="btn1" style="height:50px;width:300px;" onclick="setTextareaText('Graduate Program admission procedure')">Graduate Program admission procedure</button>
+                        <button class="btn1" style="height:50px;width:300px;" onclick="setTextareaText('Freshmen enrollment procedure')" style="float: right">Freshmen enrollment procedure</button>
+                        <div id="hideButtonAndDisplayText"></div>
+                    </div>
+                    <div class="card-footer">
+                        <form id="messageArea" class="input-group">
+                            <textarea type="text" id="text" name="msg" placeholder="Message TekBot......." autocomplete="off" class="form-control type_msg" required></textarea>
+                            <div class="input-group-append">
+                                <button type="submit" id="send" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="showChatButton" class="btn btn-primary">TekBot</button>
+    
+    <script>
+        function hideButtonAndDisplayText(text) {
+            const date = new Date();
+            let hour = date.getHours();
+            let minute = date.getMinutes();
+            let am_pm = "AM";
+
+            // Convert hours to 12-hour format and determine AM/PM
+            if (hour >= 12) {
+                am_pm = "PM";
+            }
+            if (hour > 12) {
+                hour -= 12;
+            }
+
+            // Adjusting 0 hours to 12 for 12-hour format
+            if (hour === 0) {
+                hour = 12;
+            }
+
+            // Adding leading zero for minutes if necessary
+            minute = (minute < 10 ? '0' : '') + minute;
+
+            const str_time = hour + ":" + minute + " " + am_pm;
+
+            var userHtml = '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">' + text + '<span class="msg_time_send">'+ str_time + '</span></div><div class="img_cont_msg"><img src="https://onedrive.live.com/embed?resid=15B5D1E39FB2A5B3%21181&authkey=%21AE9owBscxrJtTNo&width=216&height=233" class="rounded-circle user_img_msg"></div></div>';
+            
+            $("#messageFormeight").append(userHtml);
+            $(".btn1").hide(); // Hide all buttons when a message is sent
+            $(".ibon").hide(); // Hide logo when a message is sent
+            $("#h5").hide();
+        }
+        function setTextareaText(text) {
+            var textarea = document.getElementById('text');
+            textarea.value = text;
+            $(".ibon").hide();
+            $(".btn1").hide();
+            $("#h5").hide();
+        }
+        
+        $(document).ready(function() {
+            $("#chatContainer").hide();
+
+            $("#showChatButton").on("click", function() {
+                $("#chatContainer").show();
+                $(this).hide();
+            });
+
+            $(".close-chat").on("click", function() {
+                $("#chatContainer").hide();
+                $("#showChatButton").show();
+            });
+            // Add event listener for keydown event on the textarea
+            $("#text").on("keydown", function(event) {
+                // If Enter key is pressed
+                if (event.keyCode === 13) {
+                    // Prevent default behavior (creating a new line)
+                    event.preventDefault();
+                    // Trigger the form submission
+                    $("#send").click();
+                }
+            });
+            $("#messageArea").on("submit", function(event) {
+                const date = new Date();
+                let hour = date.getHours();
+                let minute = date.getMinutes();
+                let am_pm = "AM";
+
+                // Convert hours to 12-hour format and determine AM/PM
+                if (hour >= 12) {
+                    am_pm = "PM";
+                }
+                if (hour > 12) {
+                    hour -= 12;
+                }
+
+                // Adjusting 0 hours to 12 for 12-hour format
+                if (hour === 0) {
+                    hour = 12;
+                }
+                
+                // Adding leading zero for minutes if necessary
+                minute = (minute < 10 ? '0' : '') + minute;
+
+                const str_time = hour + ":" + minute + " " + am_pm;
+                var rawText = $("#text").val();
+                var userHtml = '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">' + rawText + '<span class="msg_time_send">'+ str_time + '</span></div><div class="img_cont_msg"><img src="{{ url_for("static", filename="../static/icons8-user-30.png") }}" class="rounded-circle user_img_msg padding"></div></div>';
+                
+                $("#text").val("");
+                $("#messageFormeight").append(userHtml);
+
+                $.ajax({
+                    data: {
+                        msg: rawText,
+                    },
+                    type: "POST",
+                    url: "/get",
+                }).done(function(data) {
+                    let botHtml = '';
+                    if (data[1].localeCompare('table') === 0){
+                        const uniqueTableId = 'staffTable_' + new Date().getTime();
+                        console.log("DATA 1", data[1] )
+                        console.log("unique ID", uniqueTableId )
+                        botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="{{ url_for("static", filename="../static/Untitled design (3).png") }}" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + 
+                            '<table class="staffTable" id="' + uniqueTableId + '" border="5"><thead><tr><th>Designation</th><th>Email</th><th>Name</th></tr></thead><tbody></tbody></table>'
+                            + '<span class="msg_time">' + str_time + '</span></div></div>';
+                        $("#messageFormeight").append($.parseHTML(botHtml));
+                        generateTable(data[0], uniqueTableId);
+                    }
+                    else if (data[1].localeCompare('table1') === 0){
+                        const uniqueTableId = 'staffTable_' + new Date().getTime();
+                        console.log("DATA 1", data[1])
+                        console.log("unique ID", uniqueTableId )
+                        botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="{{ url_for("static", filename="../static/Untitled design (3).png") }}" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + 
+                            '<table class="staffTable" id="' + uniqueTableId + '" border="5"><thead><tr><th>Office/Unit</th><th>Email</th><th>Name</th><th>Designation</th></tr></thead><tbody></tbody></table>'
+                            + '<span class="msg_time">' + str_time + '</span></div></div>';
+                        $("#messageFormeight").append($.parseHTML(botHtml));
+                        generateTable(data[0], uniqueTableId);
+                    }
+                    else {
+                        botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="{{ url_for("static", filename="../static/Untitled design (3).png") }}" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data[0] + '<span class="msg_time">' + str_time + '</span></div></div>';
+                        $("#messageFormeight").append($.parseHTML(botHtml));
+                    }
+                    
+                });
+                
+                event.preventDefault();
+            });
+            $("#messageArea").on("click", function(event) {
+                $(".ibon").hide();
+                $(".btn1").hide(); 
+                $("#h5").hide();
+            });
+            function generateTable(data, tableId) {
+                const tableBody = document.querySelector("#" + tableId + " tbody");
+                console.log("unique ID", data )
+                if (!tableBody) {
+                    console.error("Table body not found");
+                    return; // Exit early if table body is not found
+                }
+        
+                data.forEach(item => {
+                    const row = document.createElement("tr");
+                    Object.values(item).forEach(text => {
+                        const cell = document.createElement("td");
+                        cell.textContent = text;
+                        row.appendChild(cell);
+                    });
+                    tableBody.appendChild(row);
+                });
+            };
+        });
+    </script>
+</body>
+</html>

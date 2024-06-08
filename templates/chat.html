@@ -42,7 +42,7 @@
                     </div>
                     <div class="prompt">
                         <button class="btn1" style="height:50px;width:300px;" onclick="setTextareaText('What facilities college provide?')">What facilities college provide?</button>
-                        <button class="btn1" style="height:50px;width:300px;" onclick="setTextareaText('Undergraduate enrollment procedure')" style="float: right">Undergraduate enrollment procedure</button>
+                        <button class="btn1" style="height:50px;width:300px;" onclick="setTextareaText('Undergraduate admission procedure')" style="float: right">Undergraduate admission procedure</button>
                         <button class="btn1" style="height:50px;width:300px;" onclick="setTextareaText('Graduate Program admission procedure')">Graduate Program admission procedure</button>
                         <button class="btn1" style="height:50px;width:300px;" onclick="setTextareaText('Freshmen enrollment procedure')" style="float: right">Freshmen enrollment procedure</button>
                         <div id="hideButtonAndDisplayText"></div>
@@ -92,7 +92,9 @@
             $(".btn1").hide(); // Hide all buttons when a message is sent
             $(".ibon").hide(); // Hide logo when a message is sent
             $("#h5").hide();
+            scrollToBottom();
         }
+
         function setTextareaText(text) {
             var textarea = document.getElementById('text');
             textarea.value = text;
@@ -101,6 +103,11 @@
             $("#h5").hide();
         }
         
+        function scrollToBottom() {
+            var messageFormeight = document.getElementById('messageFormeight');
+            messageFormeight.scrollTop = messageFormeight.scrollHeight;
+        }
+
         $(document).ready(function() {
             $("#chatContainer").hide();
 
@@ -113,6 +120,7 @@
                 $("#chatContainer").hide();
                 $("#showChatButton").show();
             });
+
             // Add event listener for keydown event on the textarea
             $("#text").on("keydown", function(event) {
                 // If Enter key is pressed
@@ -123,6 +131,7 @@
                     $("#send").click();
                 }
             });
+
             $("#messageArea").on("submit", function(event) {
                 const date = new Date();
                 let hour = date.getHours();
@@ -184,16 +193,19 @@
                         botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="{{ url_for("static", filename="../static/Untitled design (3).png") }}" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data[0] + '<span class="msg_time">' + str_time + '</span></div></div>';
                         $("#messageFormeight").append($.parseHTML(botHtml));
                     }
-                    
+                    scrollToBottom();
                 });
-                
+
                 event.preventDefault();
+                scrollToBottom();
             });
+
             $("#messageArea").on("click", function(event) {
                 $(".ibon").hide();
                 $(".btn1").hide(); 
                 $("#h5").hide();
             });
+
             function generateTable(data, tableId) {
                 const tableBody = document.querySelector("#" + tableId + " tbody");
                 console.log("unique ID", data )
@@ -211,7 +223,7 @@
                     });
                     tableBody.appendChild(row);
                 });
-            };
+            }
         });
     </script>
 

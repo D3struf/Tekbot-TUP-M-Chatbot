@@ -668,6 +668,46 @@
 		"context_set": ""
     },
 	{
+        "tag": "specify_cla",
+        "patterns": [
+			"faculty members of cla",
+			"faculty cla",
+			"prof in cla",
+			"teachers in cla",
+			"professor in cla",
+			"faculty members of collage of liberal arts",
+			"faculty collage of liberal arts",
+			"prof in collage of liberal arts",
+			"teachers in collage of liberal arts",
+			"professor in collage of liberal arts"
+			
+        ],
+        "responses": [
+			"Please specify the department of faculty members under College of Liberal Arts."
+        ],
+		"context_set": ""
+    },
+	{
+        "tag": "specify_cit",
+        "patterns": [
+			"faculty members of cit",
+			"faculty cit",
+			"prof in cit",
+			"teachers in cit",
+			"professor in cit",
+			"faculty members of collage of insdustrial technology",
+			"faculty collage of insdustrial technology",
+			"prof in collage of insdustrial technology",
+			"teachers in collage of insdustrial technology",
+			"professor in collage of insdustrial technology"
+			
+        ],
+        "responses": [
+			"Please specify the department of faculty members under College of Industrial Technology."
+        ],
+		"context_set": ""
+    },
+	{
         "tag": "specify_admission_procedure",
         "patterns": [
 			"admission procedure",
@@ -4096,6 +4136,8 @@
 			"How to apply for admission?",
 			"where to apply for admission?",
 			"how to enroll?",
+			"undergraduate admission procedure",
+			"undergraduate admission",
 			"what is the procedure for enrollment?"
         ],
         "responses": [
@@ -6936,7 +6978,7 @@
 			}
 			
         ]],
-		"context_set": ""
+		"context_set": "table"
     },
 	{
 		"tag": "cos_department_chemistry",
@@ -8080,7 +8122,7 @@
 			"Email": "wilma_enriquez@tup.edu.ph"
 		}
         ]],
-		"context_set": ""
+		"context_set": "table"
     },
 
 	{
@@ -8943,7 +8985,7 @@
 		
 			
         ]],
-		"context_set": ""
+		"context_set": "table"
     },
 
 	{

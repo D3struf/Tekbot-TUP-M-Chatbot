@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 
 # Tekbot-without-training
-from chat_Tekbot import get_Chat_response
+# from chat_Tekbot import get_Chat_response
+from new_chat_Tekbot import get_Chat_response
 
 app = Flask(__name__)
 

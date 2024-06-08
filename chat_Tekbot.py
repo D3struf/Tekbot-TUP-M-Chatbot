@@ -33,6 +33,7 @@ def get_response(user_input):
 
     for intent in intents:
         if intent['tag'] == predicted_tag:
+            print(predicted_tag)
             response = random.choice(intent['responses'])
             context = intent['context_set']
     
@@ -44,6 +45,7 @@ def preprocess_input(text):
     tokens = nltk.word_tokenize(text.lower())
     tokens = [token for token in tokens if len(token) > 1]
     lemmatized_tokens = [lemmatizer.lemmatize(token) for token in tokens]
+    print(' '.join(lemmatized_tokens))
     return ' '.join(lemmatized_tokens)
 
 def get_Chat_response(text):

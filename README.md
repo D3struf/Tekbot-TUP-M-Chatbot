@@ -81,8 +81,8 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Authors
 
-[John Paul Monter](https://github.com/D3struf) - Lead Developer
-[Maria Evita Juan](https://github.com/evyjuan) - UI/UX Developer
-[Jeanne May Carolino](https://github.com/jeannmaycarolino) - Data Analyst & Research Developer
-[Mary Jane Calulang](https://github.com/meri-hane) - Project Manager
+[John Paul Monter](https://github.com/D3struf) - Lead Developer \
+[Maria Evita Juan](https://github.com/evyjuan) - UI/UX  \
+[Jeanne May Carolino](https://github.com/jeannmaycarolino) - Data Analyst & Research Developer \
+[Mary Jane Calulang](https://github.com/meri-hane) - Project Manager \
 [Vincent Johanne Tenorio](https://github.com/Yuhan-BSCS) - Team Lead

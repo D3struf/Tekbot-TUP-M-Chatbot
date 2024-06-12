@@ -62,7 +62,7 @@ cd Tekbot-TUP-M-Chatbot
 ``` bash
 pip install -r requirements.txt
 pip install spacy
-pip python -m spacy download en_core_web_sm
+python -m spacy download en_core_web_sm
 ```
 
 - Run the application:
